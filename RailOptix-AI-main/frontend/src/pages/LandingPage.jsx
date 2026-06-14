@@ -55,6 +55,12 @@ const LandingPage = () => {
             Reducing Delays. Maximizing Throughput. Empowering Indian Railways section controllers with real-time AI-optimized precedence decisions.
           </p>
 
+          {/* Model Prototype Note */}
+          <div className="max-w-2xl mx-auto p-4.5 rounded-xl bg-cyan-950/15 border border-cyan-500/20 text-cyan-400 text-xs font-semibold leading-relaxed shadow-[0_0_15px_rgba(6,182,212,0.05)]">
+            <span className="font-extrabold uppercase tracking-widest text-[10px] bg-cyan-500 text-slate-950 px-2 py-0.5 rounded-md mr-2">Note</span> 
+            This is the model prototype of our project which consists only frontend here for more details refer <a href="https://github.com/aneeshcodes07/RailOptix-AI" target="_blank" rel="noopener noreferrer" className="underline font-bold hover:text-cyan-300 transition-colors">GitHub repository</a>.
+          </div>
+
           <div className="flex flex-wrap items-center justify-center gap-4 pt-4">
             <Link 
               to="/dashboard"
