@@ -33,6 +33,12 @@ const LandingPage = () => {
   return (
     <div className="min-h-screen flex flex-col text-slate-100 selection:bg-cyan-500 selection:text-slate-900">
       
+      {/* Top Model Prototype Announcement Bar */}
+      <div className="w-full bg-cyan-950/45 border-b border-cyan-500/20 backdrop-blur-md relative z-20 py-3.5 px-4 text-center text-xs font-semibold text-cyan-400">
+        <span className="font-extrabold uppercase tracking-widest text-[10px] bg-cyan-500 text-slate-950 px-1.5 py-0.5 rounded mr-2">Note</span> 
+        This is the model prototype of our project which consists only frontend here for more details refer <a href="https://github.com/aneeshcodes07/RailOptix-AI" target="_blank" rel="noopener noreferrer" className="underline font-bold hover:text-cyan-300 transition-colors">GitHub repository</a>.
+      </div>
+      
       {/* Premium Sci-Fi Background Gradient & Ambient Nodes */}
       <div className="absolute top-0 left-0 w-full h-[500px] bg-gradient-to-b from-cyan-500/10 via-transparent to-transparent pointer-events-none" />
 
@@ -54,6 +60,8 @@ const LandingPage = () => {
           <p className="text-slate-400 text-lg leading-relaxed">
             Reducing Delays. Maximizing Throughput. Empowering Indian Railways section controllers with real-time AI-optimized precedence decisions.
           </p>
+
+
 
           <div className="flex flex-wrap items-center justify-center gap-4 pt-4">
             <Link 
