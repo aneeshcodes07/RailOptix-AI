@@ -3,9 +3,9 @@ import time
 import uvicorn
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
-from backend.database.connection import engine, Base, SessionLocal
-from backend.services.simulator import initialize_data, step_simulation
-from backend.api import trains, stations, conflicts, recommendations, simulations, dashboard
+from database.connection import engine, Base, SessionLocal
+from services.simulator import initialize_data, step_simulation
+from api import trains, stations, conflicts, recommendations, simulations, dashboard
 
 # 1. Initialize DB tables
 Base.metadata.create_all(bind=engine)
