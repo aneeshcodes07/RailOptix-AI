@@ -149,7 +149,7 @@ function simulateStep() {
 }
 
 function handleMockRequest(url, options) {
-  const parsedUrl = new URL(url);
+  const parsedUrl = new URL(url, window.location.origin);
   const path = parsedUrl.pathname;
   const method = options?.method || 'GET';
 
@@ -356,7 +356,14 @@ function mockResponse(data, status = 200) {
 // Monkey-patch window.fetch
 const originalFetch = window.fetch;
 window.fetch = async function (url, options) {
-  const urlStr = typeof url === 'string' ? url : url.url;
+  let urlStr = '';
+  if (typeof url === 'string') {
+    urlStr = url;
+  } else if (url && typeof url === 'object' && url.url) {
+    urlStr = url.url;
+  } else if (url && typeof url.toString === 'function') {
+    urlStr = url.toString();
+  }
   
   if (urlStr && (urlStr.startsWith('http://localhost:8000/api') || urlStr.includes('/api/'))) {
     // If running on a live domain (like Vercel), directly serve mock data for localhost requests
