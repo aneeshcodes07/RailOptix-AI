@@ -30,7 +30,7 @@ let stations = [
 ];
 
 let conflicts = [
-  { id: 1, train1: "Express 11005", train2: "Garib Rath (12909)", track_section: "Station B - Station C", severity: "High", recommendation: "Hold Express 11005 at Station B loop and allow Garib Rath to proceed on outbound track.", expected_benefit: `${getRandomNonZero(10, 18)} Minutes Saved`, explanation: "Garib Rath has higher priority class and lower current delay.", is_active: true }
+  { id: 1, train1: "Express 11005", train2: "Garib Rath (12909)", track_section: "Station B - Station C", severity: "High", recommendation: "Hold Express 11005 at Station B loop and allow Garib Rath to proceed on outbound track.", expected_benefit: `${getRandomNonZero(10, 18)} Minutes Saved`, explanation: "Garib Rath has higher priority class and lower current delay.", is_active: true, created_at: new Date().toISOString() }
 ];
 
 let recommendations = [
@@ -42,6 +42,17 @@ let simulations = [
   { id: 2, scenario_name: "Signal Failure", before_delay: getRandomNonZero(55, 65), after_delay: getRandomNonZero(20, 30), timestamp: new Date().toISOString() },
   { id: 3, scenario_name: "Track Block", before_delay: getRandomNonZero(70, 85), after_delay: getRandomNonZero(30, 40), timestamp: new Date().toISOString() }
 ];
+
+function getNormalSpeed(type) {
+  const speeds = {
+    "Vande Bharat": 130,
+    "Rajdhani": 120,
+    "Express": 100,
+    "Passenger": 60,
+    "Freight": 50
+  };
+  return speeds[type] || 80;
+}
 
 function simulateStep() {
   // Reset occupancies to at least 1 (non-zero)
