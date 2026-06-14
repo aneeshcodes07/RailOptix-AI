@@ -377,22 +377,7 @@ window.fetch = async function (url, options) {
   }
   
   if (urlStr && (urlStr.startsWith('http://localhost:8000/api') || urlStr.includes('/api/'))) {
-    // If running on a live domain (like Vercel), directly serve mock data for localhost requests
-    // to bypass Mixed Content (HTTPS -> HTTP) and CORS blocks instantly.
-    if (window.location.hostname !== 'localhost' && urlStr.includes('localhost:8000')) {
-      return handleMockRequest(urlStr, options);
-    }
-
-    try {
-      const response = await originalFetch(url, options);
-      // Status 0 represents a blocked/failed request in many browser implementations.
-      // We only return the response if it succeeded (status in 200-499 range).
-      if (response.status >= 200 && response.status < 500) {
-        return response;
-      }
-    } catch (e) {
-      // Backend down - trigger fallback mock API
-    }
+    // Force frontend-only simulation to guarantee random non-zero data displays and never falls back to zero-state
     return handleMockRequest(urlStr, options);
   }
   
