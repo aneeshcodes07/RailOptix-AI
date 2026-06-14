@@ -135,7 +135,7 @@ Controller Dashboard
 
 ## Database
 
-* PostgreSQL
+* MySQL
 
 ## Optimization and Analytics
 
