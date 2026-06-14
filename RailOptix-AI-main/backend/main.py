@@ -1,18 +1,18 @@
 import os
 import sys
 
-# Dynamic module registration to support deploying the backend folder directly to Vercel
+# Force-register 'backend' package in sys.modules to support direct Vercel deployment of the backend folder.
 current_dir = os.path.dirname(os.path.abspath(__file__))
 if current_dir not in sys.path:
     sys.path.insert(0, current_dir)
 
-try:
-    import backend
-except ImportError:
-    import types
+import types
+backend_module = sys.modules.get('backend')
+if not backend_module or not hasattr(backend_module, '__path__') or current_dir not in backend_module.__path__:
     backend_module = types.ModuleType('backend')
     backend_module.__path__ = [current_dir]
     sys.modules['backend'] = backend_module
+
 
 import threading
 import time
