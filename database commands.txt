@@ -1,0 +1,53 @@
+1. Run the Backend Server
+Since you are on Windows, you can start the backend using the Python Launcher (py):
+
+powershell
+py backend/run.py
+(This starts the FastAPI application using Uvicorn on port 8000 with hot-reloading enabled).
+
+2. Run Backend System Tests
+To verify all models, scoring, and conflict recommendation engines are functioning correctly:
+
+powershell
+py -m backend.tests.run_tests
+
+
+===like to see the backend data how to view it?===
+
+Here are the three easiest ways to view the backend data:
+
+Method 1: Interactive Swagger API Docs (Recommended)
+Since the backend server is running, you can query and see all the data directly in your browser:
+
+Open http://localhost:8000/docs.
+Expand the endpoint you want to query:
+GET /api/trains — View all trains, priorities, delays, and statuses.
+GET /api/stations — View stations and capacity.
+GET /api/conflicts — View active conflicts.
+GET /api/dashboard — View aggregate metrics.
+Click the Try it out button in the top right of the endpoint, then click Execute to see the live JSON data.
+Method 2: Query the SQLite Database via Terminal
+The database is stored locally as 
+
+railoptix.db
+. You can run a quick Python one-liner in your PowerShell terminal to print out the data formatted in tables:
+
+View Train Fleet:
+powershell
+py -c "import sqlite3, pandas as pd; conn = sqlite3.connect('railoptix.db'); print(pd.read_sql_query('SELECT id, train_name, train_type, status, current_station, target_station FROM trains', conn).to_string())"
+View Stations:
+powershell
+py -c "import sqlite3, pandas as pd; conn = sqlite3.connect('railoptix.db'); print(pd.read_sql_query('SELECT * FROM stations', conn).to_string())"
+View Conflicts:
+powershell
+py -c "import sqlite3, pandas as pd; conn = sqlite3.connect('railoptix.db'); print(pd.read_sql_query('SELECT * FROM conflicts', conn).to_string())"
+Method 3: VS Code SQLite Extension (GUI)
+Install a VS Code extension like SQLite Viewer or SQLite Explorer.
+Go to the file explorer on the left sidebar.
+Right-click on 
+
+railoptix.db
+ and select Open with SQLite Viewer.
+You will be able to click and explore tables (trains, stations, tracks, conflicts, recommendations) visually.
+Checking sqlite3 availability finished
+I am ready for any follow-up questions or changes you would like to make to the project!
